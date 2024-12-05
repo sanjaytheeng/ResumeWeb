@@ -1,0 +1,184 @@
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Detail</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #495057;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .resume-photo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #007bff;
+    }
+
+    .resume-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .resume-header h2 {
+      font-size: 2rem;
+      color: #007bff;
+    }
+
+    .resume-header p {
+      font-size: 1.2rem;
+    }
+
+    .resume-info {
+      margin-top: 20px;
+    }
+
+    .resume-info h3 {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .resume-info p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      font-size: 1.1rem;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .resume-details-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .resume-details-container .col-md-4 {
+      max-width: 250px;
+      flex: 0 0 30%;
+      margin-right: 30px;
+    }
+
+    .resume-details-container .col-md-8 {
+      max-width: 700px;
+      flex: 0 0 65%;
+    }
+
+    .resume-details-container .col-md-4 img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .resume-footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #ddd;
+    }
+
+  
+
+    /* Add Hover Effects for Links */
+    a:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="resume-header">
+          <h2>{{ resume.first_name }} {{ resume.last_name }}</h2>
+          <p class="lead">Resume Details</p>
+        </div>
+
+        <div class="resume-details-container">
+          <!-- Left Column (Profile Photo) -->
+          <div class="col-md-4">
+            {% if resume.photo %}
+            <img src="{{ resume.photo.url }}" class="resume-photo" alt="Resume Photo">
+            {% else %}
+            <p class="text-center">No Photo Available</p>
+            {% endif %}
+          </div>
+
+          <!-- Right Column (Resume Info) -->
+          <div class="col-md-8">
+            <div class="resume-info">
+              <h3>Contact Information</h3>
+              <p><strong>Email:</strong> <a href="mailto:{{ resume.contact_email }}">{{ resume.contact_email }}</a></p>
+              <p><strong>Phone:</strong> {{ resume.phone_number }}</p>
+              <p><strong>LinkedIn:</strong> 
+                {% if resume.linkedin_url %}
+                <a href="{{ resume.linkedin_url }}" target="_blank">View LinkedIn Profile</a>
+                {% else %}
+                N/A
+                {% endif %}
+              </p>
+            </div>
+
+            <div class="resume-info">
+              <h3>Skills</h3>
+              <p>{{ resume.skills }}</p>
+            </div>
+
+            <div class="resume-info">
+              <h3>Education</h3>
+              <p>{{ resume.education }}</p>
+            </div>
+
+            <div class="resume-info">
+              <h3>Experience</h3>
+              <p>{{ resume.experience }}</p>
+            </div>
+
+            <hr>
+
+            <div class="resume-info">
+              <p><strong>Submitted on:</strong> {{ resume.created_at|date:"F j, Y, g:i a" }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="{% url 'generate_pdf' resume.id %}" class="btn btn-primary">Generate PDF</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-footer">
+    <p>© 2024 Company Name | All Rights Reserved</p>
+  </div>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

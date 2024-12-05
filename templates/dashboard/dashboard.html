@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Resume Submissions</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Resume Submission Dashboard</h1>
+
+      <!-- Card-based grid layout -->
+      <div class="card-columns">
+        {% for resume in resumes %}
+        <div class="card">
+          <!-- Image Section -->
+          <div class="resume-photo-container">
+            {% if resume.photo %}
+            <img
+              src="{{ resume.photo.url }}"
+              class="card-img-top"
+              alt="Resume Photo"
+            />
+            {% else %}
+            <p class="text-center p-3">No Photo Available</p>
+            {% endif %}
+          </div>
+          
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ resume.first_name }} {{ resume.last_name }}
+            </h5>
+            <p class="card-text">
+              <strong>Email:</strong> {{ resume.contact_email }}
+            </p>
+            <p class="card-text">
+              <strong>Phone:</strong> {{ resume.phone_number }}
+            </p>
+            <a href="{% url 'resume_detail' resume.id %}" class="btn btn-info">View Resume</a>
+          </div>
+        </div>
+        {% empty %}
+        <div class="empty-row">
+          <p>No resumes submitted yet.</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

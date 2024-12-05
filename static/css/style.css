@@ -1,0 +1,73 @@
+/* Center the footer text with some padding */
+.sidebar-footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 0.8em;
+    color: #888;
+  }
+  
+  /* Customize the horizontal line */
+  .sidebar-footer hr {
+    width: 80%;
+    border-top: 1px solid #ccc;
+    margin: 0 auto;
+  }
+  
+  /* General Resume Styles */
+.resume-preview {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.resume-preview h2, .resume-preview h3 {
+  margin-bottom: 10px;
+}
+
+.resume-preview h5 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.resume-preview p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.resume-preview hr {
+  border-top: 2px solid #ddd;
+  margin: 20px 0;
+}
+
+.resume-preview img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.resume-preview .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.resume-preview .col-md-8 {
+  padding-left: 30px;
+}
+
+/* Adjust the layout for smaller screens */
+@media (max-width: 768px) {
+  .resume-preview .row {
+    flex-direction: column;
+  }
+  .resume-preview .col-md-4, .resume-preview .col-md-8 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
