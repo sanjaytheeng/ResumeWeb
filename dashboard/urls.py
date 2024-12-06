@@ -2,13 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from . import views
-from .views import generate_pdf
+
 
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('resume/<int:resume_id>/', views.resume_detail, name='resume_detail'),
-     path('resume/<int:resume_id>/generate_pdf/', generate_pdf, name='generate_pdf'),
+    #  path('resume/<int:resume_id>/generate_pdf/', generate_pdf, name='generate_pdf'),
 ]
 
 if settings.DEBUG:
