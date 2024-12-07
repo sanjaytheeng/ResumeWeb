@@ -24,7 +24,7 @@ h1 {
   transition: all 0.3s ease;
   background-color: #ffffff;
   overflow: hidden;
-  width: 310px; /* Fixed width for the cards */
+  width: 320px; /* Fixed width for the cards */
   height: 400px; /* Fixed height for the cards */
   margin-bottom: 20px;
 }

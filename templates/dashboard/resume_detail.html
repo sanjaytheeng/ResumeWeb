@@ -169,6 +169,11 @@
 
         <div class="d-flex justify-content-between mt-4">
             <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="{% url 'generate_pdf' resume.id %}" class="btn btn-secondary">Generate PDF</a>
+            <a href="{% url 'edit_resume' resume.id %}" class="btn btn-secondary">Edit Resume</a>
+            <a href="{% url 'resume_qr' resume.id %}" class="btn btn-secondary">Scan Qr</a>
+
+
           </div>
       </div>
     </div>
