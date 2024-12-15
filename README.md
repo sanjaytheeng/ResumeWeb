@@ -24,4 +24,4 @@ pip install -r requirements.txt
 ```
 
 ## Read Documentation
-Please read the documentation file for more [support](**https://docs.djangoproject.com/en/5.1/**)
+Please read the documentation file for more [support](https://docs.djangoproject.com/en/5.1/)
