@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .header {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin: 5px 0;
+            color: #333;
+        }
+        .header p {
+            font-size: 16px;
+            margin: 3px 0;
+            color: #555;
+        }
+        .section {
+            margin: 5px 0;
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin: 5px 0;
+        }
+        .link {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            {% if user.photo %}
+            <img src="{{ user.photo.url }}" alt="User Photo">
+            {% endif %}
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <p>Email: <a href="mailto:{{ user.contact_email }}" class="link">{{ user.contact_email }}</a></p>
+            <p>Phone: {{ user.phone_number }}</p>
+        </div>
+
+        <!-- LinkedIn Section -->
+        <div class="section">
+            <h2>LinkedIn</h2>
+            <p><a href="{{ user.linkedin_url }}" class="link">{{ user.linkedin_url }}</a></p>
+        </div>
+
+        <!-- GitHub Section -->
+        <div class="section">
+            <h2>GitHub</h2>
+            <p><a href="{{ user.github_url }}" class="link">{{ user.github_url }}</a></p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Skills</h2>
+            <p>{{ user.skills }}</p>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2>Education</h2>
+            <p>{{ user.education }}</p>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section">
+            <h2>Experience</h2>
+            <p>{{ user.experience }}</p>
+        </div>
+    </div>
+</body>
+</html>

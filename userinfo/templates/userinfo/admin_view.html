@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin View</title>
+</head>
+<body>
+    <h1>Student List</h1>
+    <table border="1">
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>LinkedIn</th>
+            <th>GitHub</th>
+            <th>Skills</th>
+            <th>Education</th>
+            <th>Experience</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>
+                {% if user.photo %}
+                    <img src="{{ user.photo.url }}" alt="User Photo" width="100">
+                {% else %}
+                    No photo uploaded
+                {% endif %}
+            </td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.contact_email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td><a href="{{ user.linkedin_url }}">{{ user.linkedin_url }}</a></td>
+            <td>
+                {% if user.github_url %}
+                    {{ user.generate_github_qrcode|safe }}
+                {% else %}
+                    No GitHub URL
+                {% endif %}
+            </td>
+            <td>{{ user.skills }}</td>
+            <td>{{ user.education }}</td>
+            <td>{{ user.experience }}</td>
+            <td>
+                <button><a href="{% url 'delete_user' user.id %}" onclick="return confirm('Are you sure you want to Remove this user?');">Remove</a></button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user.first_name }} {{ user.last_name }}'s Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-button a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .back-button a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            {% if user.photo %}
+            <img src="{{ user.photo.url }}" alt="User Photo">
+            {% else %}
+            <img src="https://via.placeholder.com/100" alt="Default Photo">
+            {% endif %}
+            <div>
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <p>{{ user.contact_email }}</p>
+                <p>{{ user.phone_number }}</p>
+            </div>
+
+        </div>
+        <div class="section">
+            <h2>LinkedIn</h2>
+            <p><a href="{{ user.linkedin_url }}" target="_blank">{{ user.linkedin_url }}</a></p>
+        </div>
+        <div class="section">
+            <h2>GitHub</h2>
+            <p><a href="{{ user.github_url }}" target="_blank">{{ user.github_url }}</a></p>
+        </div>
+        <div class="section">
+            <h2>Skills</h2>
+            <p>{{ user.skills }}</p>
+        </div>
+        <div class="section">
+            <h2>Education</h2>
+            <p>{{ user.education }}</p>
+        </div>
+        <div class="section">
+            <h2>Experience</h2>
+            <p>{{ user.experience }}</p>
+        </div>
+        <div class="back-button">
+            <a href="{% url 'home_page' %}">Back to Home</a>
+        <a href="{% url 'generate_pdf' user.id %}" style="margin-left: 20px;">Download Resume as PDF</a>
+
+        </div>
+    </div>
+</body>
+</html>

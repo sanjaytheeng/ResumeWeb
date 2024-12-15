@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .add-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .add-button a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .add-button a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Students Resume</h1>
+    <div class="container">
+    {% for user in users %}
+    <div class="card" onclick="window.location.href='{% url 'user_detail' user.id %}'">
+        {% if user.photo %}
+        <img src="{{ user.photo.url }}" alt="User Photo">
+        {% else %}
+        <img src="https://via.placeholder.com/100" alt="Default Photo">
+        {% endif %}
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <p>{{ user.contact_email }}</p>
+    </div>
+    {% endfor %}
+</div>
+    <div class="add-button">
+        <a href="{% url 'user_form' %}">Add Student</a>
+    </div>
+
+<div id="chatbot-container" style="position: fixed; bottom: 20px; right: 20px; width: 300px;">
+    <div id="chatbot-box" style="display: none; border: 1px solid #ccc; background: white; border-radius: 10px; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div id="chatbot-messages" style="height: 200px; overflow-y: auto; border-bottom: 1px solid #ddd; margin-bottom: 10px;"></div>
+        <input id="chatbot-input" type="text" placeholder="Type your message..." style="width: 80%; padding: 5px;">
+        <button id="chatbot-send" style="width: 18%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 5px;">Send</button>
+    </div>
+    <button id="chatbot-toggle" style="background-color: #4CAF50; color: white; border: none; border-radius: 50%; width: 50px; height: 50px;">💬</button>
+</div>
+
+<script>
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotBox = document.getElementById('chatbot-box');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotSend = document.getElementById('chatbot-send');
+
+    chatbotToggle.addEventListener('click', () => {
+        chatbotBox.style.display = chatbotBox.style.display === 'none' ? 'block' : 'none';
+    });
+
+    chatbotSend.addEventListener('click', () => {
+        const userMessage = chatbotInput.value.trim();
+        if (!userMessage) return;
+        chatbotMessages.innerHTML += `<div><b>You:</b> ${userMessage}</div>`;
+        chatbotInput.value = '';
+
+        // Send message to server
+        fetch(`/chatbot/?message=${encodeURIComponent(userMessage)}`)
+            .then(response => response.json())
+            .then(data => {
+                chatbotMessages.innerHTML += `<div><b>Bot:</b> ${data.response}</div>`;
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            })
+            .catch(error => {
+                chatbotMessages.innerHTML += `<div><b>Bot:</b> Sorry, there was an error. Try again later.</div>`;
+                console.error(error);
+            });
+    });
+</script>
+
+
+
+</body>
+</html>
