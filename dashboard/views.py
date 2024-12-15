@@ -3,7 +3,7 @@ from Container.models import Resume
 from django.http import HttpResponse # type: ignore
 from django.conf import settings # type: ignore
 import os
-from reportlab.lib.units import inch
+from reportlab.lib.units import inch # type: ignore
 from reportlab.platypus import Image
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
